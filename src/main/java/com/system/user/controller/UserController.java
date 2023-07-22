@@ -1,12 +1,11 @@
 package com.system.user.controller;
 
+import com.system.user.dao.UserDao;
 import com.system.user.models.User;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * la anotación @RestController le dice a spring-boot que esta clase va a ser un controlador,
@@ -19,6 +18,11 @@ public class UserController {
      * especifico en un controlador
      * @return una cadena de prueba para comprobar que el método esta funcionando correctamente
      */
+
+    // @Autowired automaticamente crea el objeto userDao (si se usa esta anotación en otras clases los objetos
+    // van a compartir memoria, así que hay que usarlo con precaución)
+    @Autowired
+    private UserDao userDao;
 
     // método de prueba
     @RequestMapping(value = "prueba")
@@ -52,14 +56,6 @@ public class UserController {
 
     @RequestMapping(value = "api/usuarios")
     public List<User> getUser(){
-        List<User> userList = new ArrayList<>();
-        User user = new User(1, "John", "Angarita", "john@gmail.com", "11", "12345");
-        User user1 = new User(2, "Kevin", "Jose", "jose@gmail.com", "22", "54321");
-        User user2 = new User(3, "Yorle", "Lauren", "lauren@gmail.com", "33", "098765");
-
-        userList.add(user);
-        userList.add(user1);
-        userList.add(user2);
-        return userList;
+        return userDao.getUser();
     }
 }

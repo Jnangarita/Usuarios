@@ -34,3 +34,6 @@ build/
 
 ### Front-end ###
 /src/main/resources/static/node_modules
+
+### DATABASE ###
+application.properties
