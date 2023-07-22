@@ -47,7 +47,7 @@ public class UserController {
 
     // el método recibe un argumento id y se lo pasa al constructor de User, de esta manera
     // hace que el id sea dinamico y no estatico
-    @RequestMapping(value = "api/usuario/{id}")
+    @RequestMapping(value = "api/usuario/{id}", method = RequestMethod.GET)
     public User getUser(@PathVariable int id){
         // id, name, lastName, email, phone, password
         User user = new User(id, "John", "Angarita", "john@gmail.com", "11", "12345");
@@ -57,5 +57,10 @@ public class UserController {
     @RequestMapping(value = "api/usuarios")
     public List<User> getUser(){
         return userDao.getUser();
+    }
+
+    @RequestMapping(value = "api/usuarios/{id}", method = RequestMethod.DELETE)
+    public void deleteUser(@PathVariable int id){
+        userDao.delete(id);
     }
 }

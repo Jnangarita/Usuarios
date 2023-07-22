@@ -23,10 +23,27 @@ async function loadUser(){// async se utiliza junto a await
 
     let listHTML = '';
     for(let user of userList){
-        let userHTML = '<tr><td>'+ user.id +'</td><td>'+ user.name +' '+ user.lastName +'</td><td>'+ user.email +'</td><td>'+ user.phone +'</td><td><a href="#" class="btn btn-danger btn-circle btn-sm"><i class="fas fa-trash"></i></a></td></tr>'
+        let btnDelete = '<a href="#" onclick="deleteUser(' + user.id + ')" class="btn btn-danger btn-circle btn-sm"><i class="fas fa-trash"></i></a>';
+
+        let userHTML = '<tr><td>'+ user.id +'</td><td>'+ user.name +' '+ user.lastName +'</td><td>'+ user.email +'</td><td>'+ user.phone +'</td><td>' + btnDelete + '</td></tr>'
 
         listHTML += userHTML;
     }
 
     document.querySelector('#userTable tbody').outerHTML = listHTML;
+}
+
+async function deleteUser(id){
+    if(!confirm('¿Desea eliminar el usuario?')){
+        return;
+    }
+
+    const request = await fetch('api/usuarios/' + id, {
+      method: 'DELETE',
+      headers: {
+        'Accept': 'application/json',// indica que va a utilizar json
+        'Content-Type': 'application/json', // indica que el contenido va a ser json
+      }
+    });
+    location.reload();
 }

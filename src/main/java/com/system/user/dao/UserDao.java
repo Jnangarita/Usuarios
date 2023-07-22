@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface UserDao {
     List<User> getUser();
+
+    void delete(int id);
 }

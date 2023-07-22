@@ -1,6 +1,7 @@
 package com.system.user.dao;
 
 import com.system.user.models.User;
+import org.hibernate.mapping.UnionSubclass;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,5 +23,11 @@ public class UserDaoImp implements UserDao {
     public List<User> getUser() {
         String sql = "FROM User";
         return entityManager.createQuery(sql).getResultList();
+    }
+
+    @Override
+    public void delete(int id) {
+        User user = entityManager.find(User.class, id);
+        entityManager.remove(user);
     }
 }
