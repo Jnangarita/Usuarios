@@ -54,7 +54,7 @@ public class UserController {
         return user;
     }
 
-    @RequestMapping(value = "api/usuarios")
+    @RequestMapping(value = "api/usuarios", method = RequestMethod.GET)
     public List<User> getUser(){
         return userDao.getUser();
     }
@@ -62,5 +62,10 @@ public class UserController {
     @RequestMapping(value = "api/usuarios/{id}", method = RequestMethod.DELETE)
     public void deleteUser(@PathVariable int id){
         userDao.delete(id);
+    }
+
+    @RequestMapping(value = "api/usuarios", method = RequestMethod.POST)
+    public void registerUser(@RequestBody User user){
+        userDao.register(user);
     }
 }

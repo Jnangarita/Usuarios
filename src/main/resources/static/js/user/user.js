@@ -24,8 +24,8 @@ async function loadUser(){// async se utiliza junto a await
     let listHTML = '';
     for(let user of userList){
         let btnDelete = '<a href="#" onclick="deleteUser(' + user.id + ')" class="btn btn-danger btn-circle btn-sm"><i class="fas fa-trash"></i></a>';
-
-        let userHTML = '<tr><td>'+ user.id +'</td><td>'+ user.name +' '+ user.lastName +'</td><td>'+ user.email +'</td><td>'+ user.phone +'</td><td>' + btnDelete + '</td></tr>'
+        let phone = user.phone == null ? '-' : user.phone;
+        let userHTML = '<tr><td>'+ user.id +'</td><td>'+ user.name +' '+ user.lastName +'</td><td>'+ user.email +'</td><td>'+ phone +'</td><td>' + btnDelete + '</td></tr>'
 
         listHTML += userHTML;
     }
